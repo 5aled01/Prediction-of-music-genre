@@ -1,0 +1,35 @@
+<definitions name="GridSearchService" targetNamespace="http://127.0.0.1:5000/gridsearch"
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:tns="http://127.0.0.1:5000/gridsearch"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <message name="GridSearchRequest">
+    <part name="data" type="xsd:ArrayOfDouble"/>
+  </message>
+  <message name="GridSearchResponse">
+    <part name="result" type="xsd:ArrayOfDouble"/>
+  </message>
+  <portType name="GridSearchPortType">
+    <operation name="gridsearch">
+      <input message="tns:GridSearchRequest"/>
+      <output message="tns:GridSearchResponse"/>
+    </operation>
+  </portType>
+  <binding name="GridSearchBinding" type="tns:GridSearchPortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="gridsearch">
+      <soap:operation soapAction="http://example.com/gridsearch"/>
+      <input>
+        <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://127.0.0.1:5000/gridsearch" use="encoded"/>
+      </input>
+      <output>
+        <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://127.0.0.1:5000/gridsearch" use="encoded"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="gridsearch">
+    <port name="GridSearchPort" binding="tns:GridSearchBinding">
+      <soap:address location="http://127.0.0.1:5000/gridsearch"/>
+    </port>
+  </service>
+</definitions>
